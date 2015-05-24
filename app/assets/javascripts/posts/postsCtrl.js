@@ -1,4 +1,4 @@
-angular.module('slackerNews')
+angular.module('slasherNews')
   .controller('PostsCtrl', [
     '$scope',
     'posts',

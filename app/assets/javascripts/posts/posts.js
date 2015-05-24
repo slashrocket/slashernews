@@ -1,4 +1,4 @@
-angular.module('slackerNews')
+angular.module('slasherNews')
   .factory('posts', ['$http',
     function($http) {
       var o = {
