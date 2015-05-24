@@ -10,8 +10,8 @@ slasherNews = angular
     AuthProvider.registerPath('/api/users.json');
     AuthInterceptProvider.interceptAuth(true);
   })
-  .config(['$stateProvider', '$urlRouterProvider',
-    function($stateProvider, $urlRouterProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
+    function($stateProvider, $urlRouterProvider, $locationProvider) {
       $stateProvider
         .state('home', {
           url: '/',

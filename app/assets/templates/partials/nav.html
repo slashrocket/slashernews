@@ -2,7 +2,7 @@
   <ul class="nav navbar-nav">
     <li><a href="#/home">Home</a></li>
     <li ng-hide="signedIn()"><a ui-sref="login">Log In</a></li>
-    <li ng-hide="signedIn()"><a ui-ref="register">Register</a></li>
+    <li ng-hide="signedIn()"><a ui-sref="register">Register</a></li>
     <li ng-show="signedIn()"><a ui-sref="home">{{ user.username }}</a></li>
     <li ng-show="signedIn()"><a ng-click="logout()">Log Out</a></li>
   </ul>
