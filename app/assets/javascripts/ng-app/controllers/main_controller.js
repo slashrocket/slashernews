@@ -1,5 +1,5 @@
-angular.module('slasherNews')
-  .controller('MainCtrl', [
+slasherNews
+  .controller('MainController', [
     '$scope',
     'posts',
     function($scope, posts) {

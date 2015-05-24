@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="slasherNews">
   <head>
     <title>SlasherNews</title>
     <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
-  <body ng-app="slasherNews">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <div ng-include="'nav/_nav.html'"></div>
-        <ui-view></ui-view>
-      </div>
+  <body>
+    <div ng-include="'partials/nav.html'"></div>
+    <div class="container">
+      <ui-view></ui-view>
     </div>
+    <%= javascript_include_tag 'application' %>
   </body>
 </html>

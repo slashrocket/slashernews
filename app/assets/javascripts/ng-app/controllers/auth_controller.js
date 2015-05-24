@@ -1,8 +1,5 @@
-angular.module('flapperNews')
-  .controller('AuthCtrl', [
-    '$scope',
-    '$state',
-    'Auth',
+slasherNews
+  .controller('AuthController', ['$scope', '$state', 'Auth',
     function($scope, $state, Auth) {
       $scope.login = function() {
         Auth.login($scope.user).then(function() {
