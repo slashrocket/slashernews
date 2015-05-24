@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>SlasherNews</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-</head>
-<body ng-app="slasherNews">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <ui-view></ui-view>
+  <head>
+    <title>SlasherNews</title>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body ng-app="slasherNews">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div ng-include="'nav/_nav.html'"></div>
+        <ui-view></ui-view>
+      </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>
