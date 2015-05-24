@@ -1,4 +1,4 @@
-angular.module('slasherNews', ['ui.router', 'templates'])
+angular.module('slasherNews', ['ui.router', 'templates', 'Devise'])
 
 .config([
 '$stateProvider',
