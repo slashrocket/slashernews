@@ -3,7 +3,7 @@ slasherNews
     '$scope',
     'posts',
     function($scope, posts) {
-      $scope.posts = posts.posts
+      $scope.posts = posts.posts;
       $scope.addPost = function() {
         if ($scope.title === '') {
           return;
@@ -19,4 +19,4 @@ slasherNews
         posts.upvote(post);
       };
     }
-  ])
+  ]);

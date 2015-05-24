@@ -18,6 +18,6 @@ slasherNews
 
     $scope.$on('devise:logout', function(e, user) {
       $scope.user = {};
-      $state.go('home')
+      $state.go('home');
     });
   }]);

@@ -7,8 +7,8 @@ slasherNews
       o.getAll = function() {
         return $http.get('/posts.json').success(function(data) {
           angular.copy(data, o.posts);
-        })
-      }
+        });
+      };
       resolve: {
         postPromise: ['posts',
           function(posts) {
@@ -18,9 +18,9 @@ slasherNews
       }
       o.create = function(post) {
         return $http.post('/posts.json', post).success(function(data) {
-          o.posts.push(data)
+          o.posts.push(data);
         });
-      }
+      };
       o.upvote = function(post) {
         return $http.put('/posts/' + post.id + '/upvote.json')
           .success(function(data) {
@@ -31,7 +31,7 @@ slasherNews
         return $http.get('/posts/' + id).then(function(res) {
           return res.data;
         });
-      }
+      };
       resolve: {
         post: ['$stateParams', 'posts',
           function($stateParams, posts) {
@@ -50,4 +50,4 @@ slasherNews
       };
       return o;
     }
-  ])
+  ]);

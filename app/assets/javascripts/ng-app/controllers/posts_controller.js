@@ -21,4 +21,4 @@ slasherNews
         posts.upvoteComment(post, comment);
       };
     }
-  ])
+  ]);

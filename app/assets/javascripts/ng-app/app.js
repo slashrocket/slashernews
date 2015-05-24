@@ -42,9 +42,9 @@ slasherNews = angular
               $state.go('home');
             });
           }]
-        })     
+        });    
       $urlRouterProvider.otherwise('home');
       // enable HTML5 Mode for SEO
       $locationProvider.html5Mode({enabled: true, requireBase: false});
     }]
-  )
+  );

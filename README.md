@@ -1,1 +1,1 @@
-# slashernews_backend
+# SlasherNews - A HackerNews Clone
