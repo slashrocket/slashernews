@@ -1,0 +1,16 @@
+{
+  "name": "slashernews_backend",
+  "version": "0.0.0",
+  "homepage": "https://github.com/slashrocket/slashernews_backend",
+  "authors": [
+    "askl56 <amscott@openmailbox.org>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
