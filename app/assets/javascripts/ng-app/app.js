@@ -4,6 +4,12 @@ slasherNews = angular
     'templates',
     'Devise'
   ])
+  .config(function(AuthProvider, AuthInterceptProvider){
+    AuthProvider.loginPath('/api/users/sign_in.json');
+    AuthProvider.logoutPath('/api/users/sign_out.json');
+    AuthProvider.registerPath('/api/users.json');
+    AuthInterceptProvider.interceptAuth(true);
+  })
   .config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
       $stateProvider
