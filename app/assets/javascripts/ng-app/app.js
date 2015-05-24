@@ -44,5 +44,7 @@ slasherNews = angular
           }]
         })     
       $urlRouterProvider.otherwise('home');
+      // enable HTML5 Mode for SEO
+      $locationProvider.html5Mode({enabled: true, requireBase: false});
     }]
   )
