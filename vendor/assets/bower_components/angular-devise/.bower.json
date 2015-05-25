@@ -29,6 +29,5 @@
   },
   "_source": "git://github.com/cloudspace/angular_devise.git",
   "_target": "~1.0.2",
-  "_originalSource": "angular-devise",
-  "_direct": true
+  "_originalSource": "angular-devise"
 }
