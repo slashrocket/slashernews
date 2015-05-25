@@ -1,0 +1,29 @@
+<div class="page-header">
+  <h3>
+  <a ng-show="post.link" href="{{post.link}}">
+    {{post.title}} ({{post.link}})
+  </a>
+  <span ng-hide="post.link">
+    {{post.title}}
+  </span>
+  </h3>
+</div>
+<h4>Comments</h4>
+<div class="row" ng-show="current_user">
+ <a class="btn btn-primary pull-right" ui-sref="post.comment" role="button">New Post</a>
+ <div ui-view></div>
+</div>
+</br>
+<div class="row">
+  <div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
+    <div class="well">
+        <span class="glyphicon glyphicon-thumbs-up" ng-click="upvoteComment(comment)"></span>
+        {{comment.upvotes}}
+        <span class="coment-body">
+          {{comment.body}}
+        </span>
+      <br/>
+        - by {{comment.user.username}}
+    </div>
+  </div>
+</div>

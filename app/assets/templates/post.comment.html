@@ -1,0 +1,8 @@
+<form ng-submit="createComment()">
+  <h3>Add a new comment</h3>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Comment" ng-model="newcomment.body" required></input>
+  </div>
+  <button type="submit" class="btn btn-primary">Post</button>
+  <a class="btn btn-danger" ui-sref="post" role="button">Cancel</a>
+</form>

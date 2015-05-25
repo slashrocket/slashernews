@@ -1,0 +1,12 @@
+<form ng-submit="createPost()">
+  <h3>Add a new post</h3>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Title" ng-model="newpost.title" required></input>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Link" ng-model="newpost.link" required></input>
+  </div>
+  <button type="submit" class="btn btn-primary">Post</button>
+  <a class="btn btn-danger" ui-sref="posts" role="button">Cancel</a>
+
+</form>

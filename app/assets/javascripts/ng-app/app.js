@@ -1,5 +1,6 @@
 slasherNews = angular
   .module('slasherNews', [
+    'ngResource',
     'ui.router',
     'templates',
     'Devise'
@@ -13,15 +14,42 @@ slasherNews = angular
   .config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     function($stateProvider, $urlRouterProvider, $locationProvider) {
       $stateProvider
-        .state('home', {
-          url: '/',
-          templateUrl: 'home.html',
-          controller: 'MainController'
-        })
         .state('posts', {
-          url: '/posts/{id}',
+          url: '/',
           templateUrl: 'posts.html',
-          controller: 'PostsController'
+          controller: 'PostController',
+          resolve: {
+            posts: ['Post', function(Post){
+              return Post.all().$promise;
+            }]
+          }
+        })
+        .state('posts.new', {
+          url: 'new',
+          parent:'posts',
+          templateUrl: 'posts.new.html',
+          controller: 'PostController'
+        })
+        .state('post', {
+          url: '/post/:id',
+          templateUrl: 'post.html',
+          controller: 'CommentController',
+          resolve: {
+            post: ['Post', '$stateParams', function(Post, $stateParams){
+              return Post.show($stateParams.id).$promise;
+            }]
+          }
+        })
+        .state('post.comment', {
+          url: '',
+          parent: 'post',
+          templateUrl: 'post.comment.html',
+          controller: 'CommentController',
+          resolve: {
+            post: ['Post', '$stateParams', function(Post, $stateParams){
+              return Post.show($stateParams.id).$promise;
+            }]
+          }
         })
         .state('login',{
           url: '/login',
@@ -29,7 +57,7 @@ slasherNews = angular
           controller: 'AuthController',
           onEnter: ['$state','Auth', function($state, Auth) {
             Auth.currentUser().then(function (){
-              $state.go('home');
+              $state.go('posts');
             });
           }]
         })
@@ -39,11 +67,11 @@ slasherNews = angular
           controller: 'AuthController',
           onEnter: ['$state','Auth', function($state, Auth) {
             Auth.currentUser().then(function (){
-              $state.go('home');
+              $state.go('posts');
             });
           }]
         });    
-      $urlRouterProvider.otherwise('home');
+      $urlRouterProvider.otherwise('posts');
       // enable HTML5 Mode for SEO
       $locationProvider.html5Mode({enabled: true, requireBase: false});
     }]

@@ -14,13 +14,17 @@ module Api
     def create
       @user = User.find(current_user.id)
       @post = Post.create(post_params.merge(user_id: current_user.id))
-      respond_with @post
+      respond_to do |format| 
+        format.json { render json: @post } 
+      end
     end
 
     def upvote
-      post = Post.find(params[:id])
-      post.increment!(:upvotes)
-      respond_with post
+      @post = Post.find(params[:id])
+      @post.increment!(:upvotes)
+      respond_to do |format| 
+        format.json { render json: @post } 
+      end
     end
 
     def destroy
@@ -34,6 +38,10 @@ module Api
 
     def post_params
       params.require(:post).permit(:link, :title)
+    end
+    
+    def default_serializer_options
+      {root: false}
     end
   end
 end
