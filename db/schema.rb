@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150525101550) do
+ActiveRecord::Schema.define(version: 20150525121042) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "body"
-    t.integer  "upvotes"
+    t.integer  "upvotes",    default: 0
     t.integer  "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.integer  "user_id"
   end
 
@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 20150525101550) do
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.string   "link"
-    t.integer  "upvotes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "upvotes",    default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.integer  "user_id"
   end
 
