@@ -4,16 +4,23 @@ module Api
 
     def create
       post = Post.find(params[:post_id])
-      comment = post.comments.create(comment_params)
-      respond_with post, comment
+      comment = post.comments.create(comment_params.merge(user_id: current_user.id))
+
+      respond_with comment
     end
 
     def upvote
-      post = Post.find(params[:post_id])
-      comment = post.comments.find(params[:id])
+      comment = Comment.find(params[:id])
       comment.increment!(:upvotes)
 
-      respond_with post, comment
+      respond_with comment
+    end
+
+    def destroy
+      comment = Comment.find(params[:id])
+      if post.users.include? current_user
+        respond_with Post.destroy(params[:post_id])
+      end
     end
 
     private
