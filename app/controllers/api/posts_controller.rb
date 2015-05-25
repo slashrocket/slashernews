@@ -8,29 +8,25 @@ module Api
     end
 
     def show
-      respond_with Post.find(params[:post_id])
+      respond_with Post.find(params[:id])
     end
 
     def create
       @user = User.find(current_user.id)
       @post = Post.create(post_params.merge(user_id: current_user.id))
-      if @post.save
-        respond_with @post
-      else
-        render json: {error: "There was an error saving the post"}
-      end
+      respond_with @post
     end
 
     def upvote
-      post = Post.find(params[:post_id])
+      post = Post.find(params[:id])
       post.increment!(:upvotes)
       respond_with post
     end
 
     def destroy
-      post = Post.find(params[:post_id])
+      post = Post.find(params[:id])
       if post.users.include? current_user
-        respond_with Post.destroy(params[:post_id])
+        respond_with Post.destroy(params[:id])
       end
     end
 
