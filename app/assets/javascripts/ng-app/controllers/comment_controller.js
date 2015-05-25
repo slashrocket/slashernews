@@ -16,8 +16,15 @@ slasherNews
     };
 
     $scope.upvoteComment = function(comment){
-      comment.upvotes += 1;
-      Comment.upvote(comment.post_id, comment.id)
+      if (!$rootScope.current_user){
+        alert("You need to be logged in to vote");
+      }else{
+        if (comment.voters.indexOf($rootScope.current_user.id.toString()) < 0){
+          comment.upvotes += 1;
+          comment.voters.push($rootScope.current_user.id.toString());
+          Comment.upvote(comment.post_id, comment.id)
+        };
+      }
     };
 
     $scope.deleteComment = function(comment){

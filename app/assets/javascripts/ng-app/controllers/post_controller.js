@@ -3,9 +3,7 @@ slasherNews
     function($rootScope, $scope, $state, Post, posts) {
     
     $rootScope.posts = posts;
-
-    
-
+  
     $scope.initNewPost = function(){
       $scope.newpost = {title: "", link: "", upvotes: 0};
     };
@@ -18,8 +16,15 @@ slasherNews
     };
 
     $scope.upvotePost = function(post){
-      post.upvotes += 1;
-      Post.upvote(post.id)
+      if (!$rootScope.current_user){
+        alert("You need to be logged in to vote");
+      }else{
+        if (post.voters.indexOf($rootScope.current_user.id.toString()) < 0){
+          post.upvotes += 1;
+          post.voters.push($rootScope.current_user.id.toString());
+          Post.upvote(post.id)
+        };
+      }
     };
 
     $scope.deletePost = function(post){

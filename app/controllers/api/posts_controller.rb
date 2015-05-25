@@ -21,6 +21,7 @@ module Api
 
     def upvote
       @post = Post.find(params[:id])
+      @post.voters << current_user.id
       @post.increment!(:upvotes)
       respond_to do |format| 
         format.json { render json: @post } 
@@ -28,7 +29,7 @@ module Api
     end
 
     def destroy
-      post = Post.find(params[:id])
+      @post = Post.find(params[:id])
       if post.users.include? current_user
         respond_with Post.destroy(params[:id])
       end

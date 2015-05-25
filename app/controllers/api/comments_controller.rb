@@ -5,23 +5,22 @@ module Api
     def create
       @post = Post.find(params[:post_id])
       @comment = @post.comments.create(comment_params.merge(user_id: current_user.id))
-
       respond_to do |format| 
         format.json { render json: @comment } 
       end
     end
 
     def upvote
-      comment = Comment.find(params[:id])
-      comment.increment!(:upvotes)
-
+      @comment = Comment.find(params[:id])
+      @comment.voters << current_user.id
+      @comment.increment!(:upvotes)
       respond_to do |format| 
         format.json { render json: @comment } 
       end
     end
 
     def destroy
-      comment = Comment.find(params[:id])
+      @comment = Comment.find(params[:id])
       if post.users.include? current_user
         respond_with Post.destroy(params[:post_id])
       end
