@@ -11,6 +11,7 @@ gem 'angular_rails_csrf'
 gem 'devise'
 gem 'sprockets', '2.12.3'
 gem 'bower-rails', '~> 0.9.2'
+gem 'active_model_serializers'
 group :development do
   gem 'bullet'
   gem "lol_dba"
