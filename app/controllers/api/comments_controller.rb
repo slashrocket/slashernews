@@ -12,8 +12,10 @@ module Api
 
     def upvote
       @comment = Comment.find(params[:id])
-      @comment.voters << current_user.id
-      @comment.increment!(:upvotes)
+      if @comment.voters.include?(current_user.id.to_s)
+        @comment.voters << current_user.id
+        @comment.increment!(:upvotes)
+      end
       respond_to do |format| 
         format.json { render json: @comment } 
       end

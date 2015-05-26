@@ -21,8 +21,10 @@ module Api
 
     def upvote
       @post = Post.find(params[:id])
-      @post.voters << current_user.id
-      @post.increment!(:upvotes)
+      if @post.voters.include?(current_user.id.to_s)
+        @post.voters << current_user.id
+        @post.increment!(:upvotes)
+      end
       respond_to do |format| 
         format.json { render json: @post } 
       end
