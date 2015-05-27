@@ -17,9 +17,25 @@ group :development do
   gem "lol_dba"
 end
 group :development, :test do
-  gem 'quiet_assets'
-  gem 'byebug'
-  gem 'web-console', '~> 2.0'
-  gem 'spring'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'rspec-rails'
+  gem 'fuubar'
+  gem 'sqlite3'
+  gem 'thin'
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'rspec-api_helpers', github: 'kollegorna/rspec-api_helpers'
+  gem 'regressor', '~> 0.4.2'
+  gem 'rspec-activemodel-mocks'
 end
-
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 2.7.0'
+  gem 'email_spec'
+  gem 'rspec-inherit_from_matcher'
+end
