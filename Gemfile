@@ -21,9 +21,6 @@ group :development, :test do
   gem 'faker'
   gem 'rspec-rails'
   gem 'fuubar'
-  gem 'sqlite3'
-  gem 'thin'
-  gem 'pry'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-api_helpers', github: 'kollegorna/rspec-api_helpers'
@@ -31,11 +28,7 @@ group :development, :test do
   gem 'rspec-activemodel-mocks'
 end
 group :test do
-  gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 2.7.0'
-  gem 'email_spec'
-  gem 'rspec-inherit_from_matcher'
 end
