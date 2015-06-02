@@ -4,11 +4,11 @@ module Api
     respond_to :json
 
     def index
-      respond_with Post.all
+      respond_with Post.includes(:comments, :user)
     end
 
     def show
-      respond_with Post.find(params[:id])
+      respond_with Post.where('id = ?', params[:id]).includes(:comments, :user)
     end
 
     def create
