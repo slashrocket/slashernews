@@ -6,6 +6,6 @@ class Post < ActiveRecord::Base
   def get_data
     data = LinkThumbnailer.generate(self.link)
     self.title = data.title
-    self.thumbnail = data.images.first.src.to_s.gsub('http:','').gsub('https:','')
+    self.thumbnail = data.images.first.src.to_s.gsub('http:','').gsub('https:','') unless data.images.empty?
   end
 end
