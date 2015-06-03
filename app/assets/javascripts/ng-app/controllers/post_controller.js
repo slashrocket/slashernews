@@ -5,7 +5,7 @@ slasherNews
     $rootScope.posts = posts;
   
     $scope.initNewPost = function(){
-      $scope.newpost = {title: "", link: "", upvotes: 0};
+      $scope.newpost = {link: ""};
     };
 
     $scope.createPost = function(){

@@ -39,7 +39,7 @@ module Api
     private
 
     def post_params
-      params.require(:post).permit(:link, :title)
+      params.require(:post).permit(:link)
     end
     
     def default_serializer_options
