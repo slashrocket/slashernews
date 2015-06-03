@@ -8,7 +8,7 @@ module Api
     end
 
     def show
-      respond_with Post.where('id = ?', params[:id]).includes(:comments, :user)
+      respond_with Post.where('id = ?', params[:id]).includes(:comments, :user).first
     end
 
     def create
