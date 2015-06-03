@@ -1,26 +1,30 @@
-<div class="row" ng-show="current_user">
-  <a class="btn btn-primary pull-right" ui-sref="posts.new" role="button">New Post</a>
-  <div ui-view></div>
-</div>
-<div class="row">
-  <div ng-repeat="post in posts | orderBy:'-upvotes'">
-    <div class="row">
-      <span class="glyphicon glyphicon-thumbs-up" ng-click="upvotePost(post)"></span>
-      {{post.upvotes}}
-      <span class="post-title">
-        <a ng-show="post.link" href="{{post.link}}">
-          {{post.title}} ({{post.link}})
+<div class="container">
+  <div class="row" ng-show="current_user">
+    <a class="btn btn-primary pull-right" ui-sref="posts.new" role="button">New Post</a>
+    <div ui-view></div>
+  </div>
+  <div class="row">
+    <div ng-repeat="post in posts" class="media">
+      <div class="media-left">
+        <a href="{{post.link}}">
+          <img class="media-object" src="{{post.thumbnail}}" alt="...">
         </a>
-        <span ng-hide="post.link">
-          {{post.title}}
+      </div>
+      <div class="media-left">
+      <span class="glyphicon glyphicon-thumbs-up" ng-click="upvotePost(post)"></span>
+      </div>
+      <div class="media-body">
+        <a href="{{post.link}}">
+          <h4 class="media-heading">{{post.title}}</h4>
+        </a>
+        <span class="content">
+          <span>{{post.upvotes}} votes</span>
+          <span>posted by: {{post.user.username}}</span>
+          <span ng-show="has_comments(post)"> Last commenter: <b>{{ last_commenter(post) }}<b></span>
+          <span> | </span>
+          <a ui-sref="post({id: post.id})">{{post.comments.length}} Comments</a> 
         </span>
-      </span>
-    </div>
-    <div class="row">
-      <span class="comment-count">
-        <a ui-sref="post({id: post.id})">{{post.comments.length}} Comments</a> 
-        <span ng-show="has_comments(post)"> Last commenter: <b>{{ last_commenter(post) }}<b></span>
-      </span>
+      </div>
     </div>
   </div>
 </div>
