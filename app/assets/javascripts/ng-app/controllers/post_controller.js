@@ -9,9 +9,8 @@ slasherNews
     };
 
     $scope.createPost = function(){
-      new_post = Post.create($scope.newpost)
+      new_post = Post.create($scope.newpost);
       $rootScope.posts.push(new_post);
-      $state.go('posts');
       $scope.initNewPost();
     };
 
