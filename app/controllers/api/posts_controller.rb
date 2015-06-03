@@ -12,7 +12,6 @@ module Api
     end
 
     def create
-      @user = User.find(current_user.id)
       @post = Post.create(post_params.merge(user_id: current_user.id))
       respond_to do |format| 
         format.json { render json: @post } 
@@ -21,7 +20,7 @@ module Api
 
     def upvote
       @post = Post.find(params[:id])
-      if @post.voters.include?(current_user.id.to_s)
+      unless @post.voters.include?(current_user.id.to_s)
         @post.voters << current_user.id
         @post.increment!(:upvotes)
       end

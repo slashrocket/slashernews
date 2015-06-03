@@ -12,7 +12,7 @@ module Api
 
     def upvote
       @comment = Comment.find(params[:id])
-      if @comment.voters.include?(current_user.id.to_s)
+      unless @comment.voters.include?(current_user.id.to_s)
         @comment.voters << current_user.id
         @comment.increment!(:upvotes)
       end
