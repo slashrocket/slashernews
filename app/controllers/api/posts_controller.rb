@@ -13,8 +13,8 @@ module Api
 
     def create
       @post = Post.create(post_params.merge(user_id: current_user.id))
-      respond_to do |format| 
-        format.json { render json: @post } 
+      respond_to do |format|
+        format.json { render json: @post }
       end
     end
 
@@ -24,8 +24,8 @@ module Api
         @post.voters << current_user.id
         @post.increment!(:upvotes)
       end
-      respond_to do |format| 
-        format.json { render json: @post } 
+      respond_to do |format|
+        format.json { render json: @post }
       end
     end
 
@@ -41,7 +41,7 @@ module Api
     def post_params
       params.require(:post).permit(:link)
     end
-    
+
     def default_serializer_options
       {root: false}
     end
