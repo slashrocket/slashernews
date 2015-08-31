@@ -17,7 +17,7 @@ gem 'active_model_serializers'
 gem 'link_thumbnailer'
 group :development do
   gem 'bullet'
-  gem "lol_dba"
+  gem 'lol_dba'
 end
 group :development, :test do
   gem 'factory_girl_rails'
