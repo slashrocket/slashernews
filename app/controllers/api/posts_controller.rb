@@ -31,9 +31,8 @@ module Api
 
     def destroy
       @post = Post.find(params[:id])
-      if post.users.include? current_user
-        respond_with Post.destroy(params[:id])
-      end
+
+      respond_with Post.destroy(params[:id]) if post.users.include? current_user
     end
 
     private
