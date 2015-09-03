@@ -1,4 +1,5 @@
 module Api
+  # List, create, and modify Posts
   class PostsController < ApplicationController
     before_filter :authenticate_user!, only: [:create, :upvote, :destroy]
     respond_to :json
