@@ -5,8 +5,8 @@ module Api
     def create
       @post = Post.find(params[:post_id])
       @comment = @post.comments.create(comment_params.merge(user_id: current_user.id))
-      respond_to do |format| 
-        format.json { render json: @comment } 
+      respond_to do |format|
+        format.json { render json: @comment }
       end
     end
 
@@ -16,8 +16,8 @@ module Api
         @comment.voters << current_user.id
         @comment.increment!(:upvotes)
       end
-      respond_to do |format| 
-        format.json { render json: @comment } 
+      respond_to do |format|
+        format.json { render json: @comment }
       end
     end
 
