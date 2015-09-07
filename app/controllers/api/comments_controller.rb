@@ -23,9 +23,8 @@ module Api
 
     def destroy
       @comment = Comment.find(params[:id])
-      if post.users.include? current_user
-        respond_with Post.destroy(params[:post_id])
-      end
+
+      respond_with Post.destroy(params[:post_id]) if post.users.include? current_user
     end
 
     private
