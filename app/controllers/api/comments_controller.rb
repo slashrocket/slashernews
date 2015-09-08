@@ -1,4 +1,5 @@
 module Api
+  # Handle creating and modifying comments
   class CommentsController < ApplicationController
     before_filter :authenticate_user!, only: [:create, :upvote]
 
