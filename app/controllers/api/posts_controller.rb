@@ -21,10 +21,7 @@ module Api
 
     def upvote
       @post = Post.find(params[:id])
-      unless @post.voters.include?(current_user.id.to_s)
-        @post.voters << current_user.id
-        @post.increment!(:upvotes)
-      end
+      submit_vote unless has_already_voted_or_owns_the_post
       respond_to do |format|
         format.json { render json: @post }
       end
@@ -32,11 +29,19 @@ module Api
 
     def destroy
       @post = Post.find(params[:id])
-
       respond_with Post.destroy(params[:id]) if post.users.include? current_user
     end
 
     private
+
+    def has_already_voted_or_owns_the_post
+      @post.voters.include?(current_user.id.to_s) || @post.user_id == current_user.id
+    end
+
+    def submit_vote
+      @post.voters << current_user.id
+      @post.increment!(:upvotes)
+    end
 
     def post_params
       params.require(:post).permit(:link)
