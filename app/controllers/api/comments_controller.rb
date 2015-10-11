@@ -13,10 +13,7 @@ module Api
 
     def upvote
       @comment = Comment.find(params[:id])
-      unless @comment.voters.include?(current_user.id.to_s)
-        @comment.voters << current_user.id
-        @comment.increment!(:upvotes)
-      end
+      submit_vote unless has_already_voted_or_owns_the_comment
       respond_to do |format|
         format.json { render json: @comment }
       end
@@ -24,11 +21,19 @@ module Api
 
     def destroy
       @comment = Comment.find(params[:id])
-
       respond_with Post.destroy(params[:post_id]) if post.users.include? current_user
     end
 
     private
+
+    def has_already_voted_or_owns_the_comment
+      @comment.voters.include?(current_user.id.to_s) || @comment.user_id == current_user.id
+    end
+
+    def submit_vote
+      @comment.voters << current_user.id
+      @comment.increment!(:upvotes)
+    end
 
     def comment_params
       params.require(:comment).permit(:body)
