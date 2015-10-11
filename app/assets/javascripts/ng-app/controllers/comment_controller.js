@@ -1,7 +1,7 @@
 slasherNews
   .controller('CommentController', ['$rootScope','$scope', '$state', 'Comment', 'post',
     function($rootScope, $scope, $state, Comment, post) {
-    
+
     $rootScope.post = post;
 
     $scope.initNewComment = function(){
@@ -19,7 +19,7 @@ slasherNews
       if (!$rootScope.current_user){
         alert("You need to be logged in to vote");
       }else{
-        if (comment.voters.indexOf($rootScope.current_user.id.toString()) < 0){
+        if (!hasAlreadyVotedOrOwnsTheComment(comment, $rootScope.current_user.id)){
           comment.upvotes += 1;
           comment.voters.push($rootScope.current_user.id.toString());
           Comment.upvote(comment.post_id, comment.id)
@@ -32,4 +32,12 @@ slasherNews
       var index = $rootScope.post.comments.indexOf(comment);
       $rootScope.post.comments.splice(index, 1);
     };
+
+    //"private" (...not really) methods
+    var hasAlreadyVotedOrOwnsTheComment = (comment, userId) => {
+      var owsComment = (comment.user.id === userId);
+      var hasAlreadyVoted = (comment.voters.indexOf(userId.toString()) >= 0)
+      return (owsComment || hasAlreadyVoted);
+    };
+
   }]);
