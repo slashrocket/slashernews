@@ -36,6 +36,22 @@ bower install --save angular-devise
 
 You can then use the main file at `angular-devise/lib/devise-min.js`.
 
+Rails Assets
+------------
+
+To get AngularDevise via [Rails Assets](https://rails-assets.org/) add to your Gemfile:
+
+```ruby
+source "https://rails-assets.org" do
+  gem "rails-assets-angular-devise"
+end
+```
+
+Then `bundle`. Finally, to require the JS:
+
+```js
+//= require angular-devise/lib/devise
+```
 
 Usage
 -----
@@ -115,7 +131,7 @@ angular.module('myModule', ['Devise']).
     });
 ```
 
-### Auth.login(creds)
+### Auth.login(creds, config)
 
 Use `Auth.login()` to authenticate with the server. Keep in mind,
 credentials are sent in plaintext; use a SSL connection to secure them.
@@ -130,6 +146,9 @@ Upon a successful login, two events will be broadcast, `devise:login` and
 be broadcast if the user was logged in by `Auth.login({...})`. If the server
 has a previously authenticated session, only the login event will be broadcast.
 
+Pass any additional config options you need to provide to `$http` with
+`config`.
+
 ```javascript
 angular.module('myModule', ['Devise']).
     controller('myCtrl', function(Auth) {
@@ -137,8 +156,13 @@ angular.module('myModule', ['Devise']).
             email: 'user@domain.com',
             password: 'password1'
         };
+        var config = {
+            headers: {
+                'X-HTTP-Method-Override': 'POST'
+            }
+        };
 
-        Auth.login(credentials).then(function(user) {
+        Auth.login(credentials, config).then(function(user) {
             console.log(user); // => {id: 1, ect: '...'}
         }, function(error) {
             // Authentication failed...
@@ -173,12 +197,20 @@ Use `Auth.logout()` to de-authenticate from the server. `Auth.logout()`
 returns a promise that will be resolved to the old currentUser. Then a
 `devise:logout` event will be broadcast with the old currentUser as the argument.
 
+Pass any additional config options you need to provide to `$http` with
+`config`.
+
 ```javascript
 angular.module('myModule', ['Devise']).
     controller('myCtrl', function(Auth) {
+        var config = {
+            headers: {
+                'X-HTTP-Method-Override': 'DELETE'
+            }
+        };
         // Log in user...
         // ...
-        Auth.logout().then(function(oldUser) {
+        Auth.logout(config).then(function(oldUser) {
             // alert(oldUser.name + "you're signed out now.");
         }, function(error) {
             // An error occurred logging out.
@@ -245,6 +277,9 @@ promise that will resolve to the registered user. See
 is parsed into a user. Then a `devise:new-registration` event will be
 broadcast with the user object as the argument.
 
+Pass any additional config options you need to provide to `$http` with
+`config`.
+
 ```javascript
 angular.module('myModule', ['Devise']).
     controller('myCtrl', function(Auth) {
@@ -253,8 +288,13 @@ angular.module('myModule', ['Devise']).
             password: 'password1',
             password_confirmation: 'password1'
         };
+        var config = {
+            headers: {
+                'X-HTTP-Method-Override': 'POST'
+            }
+        };
 
-        Auth.register(credentials).then(function(registeredUser) {
+        Auth.register(credentials, config).then(function(registeredUser) {
             console.log(registeredUser); // => {id: 1, ect: '...'}
         }, function(error) {
             // Registration failed...
@@ -305,9 +345,15 @@ angular.module('myModule', []).
 
         // Catch unauthorized requests and recover.
         $scope.$on('devise:unauthorized', function(event, xhr, deferred) {
-            // Ask user for login credentials
+            // Disable interceptor on _this_ login request,
+            // so that it too isn't caught by the interceptor
+            // on a failed login.
+            var config = {
+                interceptAuth: false
+            };
 
-            Auth.login(credentials).then(function() {
+            // Ask user for login credentials
+            Auth.login(credentials, config).then(function() {
                 // Successfully logged in.
                 // Redo the original request.
                 return $http(xhr.config);
